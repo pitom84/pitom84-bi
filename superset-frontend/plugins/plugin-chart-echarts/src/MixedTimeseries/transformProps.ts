@@ -158,6 +158,7 @@ export default function transformProps(
     contributionMode,
     legendOrientation,
     legendType,
+    legendSort,
     logAxis,
     logAxisSecondary,
     markerEnabled,
@@ -212,6 +213,7 @@ export default function transformProps(
     sortSeriesAscendingB,
     timeGrainSqla,
     percentageThreshold,
+    showQueryIdentifiers = false,
     metrics = [],
     metricsB = [],
   }: EchartsMixedTimeseriesFormData = { ...DEFAULT_FORM_DATA, ...formData };
@@ -242,6 +244,10 @@ export default function transformProps(
   const MetricDisplayNameA = getMetricDisplayName(metrics[0], verboseMap);
   const MetricDisplayNameB = getMetricDisplayName(metricsB[0], verboseMap);
 
+  const dataTypes = getColtypesMapping(queriesData[0]);
+  const xAxisDataType = dataTypes?.[xAxisLabel] ?? dataTypes?.[xAxisOrig];
+  const xAxisType = getAxisType(stack, xAxisForceCategorical, xAxisDataType);
+
   const [rawSeriesA, sortedTotalValuesA] = extractSeries(rebasedDataA, {
     fillNeighborValue: stack ? 0 : undefined,
     xAxis: xAxisLabel,
@@ -249,6 +255,7 @@ export default function transformProps(
     sortSeriesAscending,
     stack,
     totalStackedValues,
+    xAxisType,
   });
   const rebasedDataB = rebaseForecastDatum(data2, verboseMap);
   const {
@@ -266,11 +273,8 @@ export default function transformProps(
     sortSeriesAscending: sortSeriesAscendingB,
     stack: Boolean(stackB),
     totalStackedValues: totalStackedValuesB,
+    xAxisType,
   });
-
-  const dataTypes = getColtypesMapping(queriesData[0]);
-  const xAxisDataType = dataTypes?.[xAxisLabel] ?? dataTypes?.[xAxisOrig];
-  const xAxisType = getAxisType(stack, xAxisForceCategorical, xAxisDataType);
   const series: SeriesOption[] = [];
   const formatter = contributionMode
     ? getNumberFormatter(',.0%')
@@ -395,10 +399,17 @@ export default function transformProps(
     const seriesName = inverted[entryName] || entryName;
     const colorScaleKey = getOriginalSeries(seriesName, array);
 
-    let displayName = `${entryName} (Query A)`;
+    let displayName: string;
 
     if (groupby.length > 0) {
-      displayName = `${MetricDisplayNameA} (Query A), ${entryName}`;
+      // When we have groupby, format as "metric, dimension"
+      const metricPart = showQueryIdentifiers
+        ? `${MetricDisplayNameA} (Query A)`
+        : MetricDisplayNameA;
+      displayName = `${metricPart}, ${entryName}`;
+    } else {
+      // When no groupby, format as just the entry name with optional query identifier
+      displayName = showQueryIdentifiers ? `${entryName} (Query A)` : entryName;
     }
 
     const seriesFormatter = getFormatter(
@@ -413,6 +424,7 @@ export default function transformProps(
       {
         ...entry,
         id: `${displayName || ''}`,
+        name: `${displayName || ''}`,
       },
       colorScale,
       colorScaleKey,
@@ -442,6 +454,7 @@ export default function transformProps(
         showValueIndexes: showValueIndexesA,
         thresholdValues,
         timeShiftColor,
+        theme,
       },
     );
     if (transformedSeries) series.push(transformedSeries);
@@ -453,10 +466,17 @@ export default function transformProps(
     const seriesName = `${seriesEntry} (1)`;
     const colorScaleKey = getOriginalSeries(seriesEntry, array);
 
-    let displayName = `${entryName} (Query B)`;
+    let displayName: string;
 
     if (groupbyB.length > 0) {
-      displayName = `${MetricDisplayNameB} (Query B), ${entryName}`;
+      // When we have groupby, format as "metric, dimension"
+      const metricPart = showQueryIdentifiers
+        ? `${MetricDisplayNameB} (Query B)`
+        : MetricDisplayNameB;
+      displayName = `${metricPart}, ${entryName}`;
+    } else {
+      // When no groupby, format as just the entry name with optional query identifier
+      displayName = showQueryIdentifiers ? `${entryName} (Query B)` : entryName;
     }
 
     const seriesFormatter = getFormatter(
@@ -471,6 +491,7 @@ export default function transformProps(
       {
         ...entry,
         id: `${displayName || ''}`,
+        name: `${displayName || ''}`,
       },
 
       colorScale,
@@ -501,6 +522,7 @@ export default function transformProps(
         showValueIndexes: showValueIndexesB,
         thresholdValues: thresholdValuesB,
         timeShiftColor,
+        theme,
       },
     );
     if (transformedSeries) series.push(transformedSeries);
@@ -696,15 +718,18 @@ export default function transformProps(
         zoomable,
       ),
       // @ts-ignore
-      data: rawSeriesA
-        .concat(rawSeriesB)
+      data: series
         .filter(
           entry =>
             extractForecastSeriesContext((entry.name || '') as string).type ===
             ForecastSeriesEnum.Observation,
         )
-        .map(entry => entry.name || '')
-        .concat(extractAnnotationLabels(annotationLayers, annotationData)),
+        .map(entry => entry.id || entry.name || '')
+        .concat(extractAnnotationLabels(annotationLayers))
+        .sort((a: string, b: string) => {
+          if (!legendSort) return 0;
+          return legendSort === 'asc' ? a.localeCompare(b) : b.localeCompare(a);
+        }),
     },
     series: dedupSeries(reorderForecastSeries(series) as SeriesOption[]),
     toolbox: {
