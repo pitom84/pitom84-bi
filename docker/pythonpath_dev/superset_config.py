@@ -105,6 +105,28 @@ class CeleryConfig:
 
 CELERY_CONFIG = CeleryConfig
 
+# Enable UI-based theme administration for admins
+# ENABLE_UI_THEME_ADMINISTRATION = True
+
+# Optional: Set initial default themes via configuration
+# These can be overridden via the UI when ENABLE_UI_THEME_ADMINISTRATION = True
+# THEME_DEFAULT = {
+#     "token": {
+#         "colorPrimary": "#2893B3",
+#         "colorSuccess": "#5ac189",
+#         # ... your theme JSON configuration
+#     }
+# }
+
+# # Optional: Dark theme configuration
+# THEME_DARK = {
+#     "algorithm": "dark",
+#     "token": {
+#         "colorPrimary": "#2893B3",
+#         # ... your dark theme overrides
+#     }
+# }
+
 FEATURE_FLAGS = {"ALERT_REPORTS": True}
 ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
 WEBDRIVER_BASEURL = f"http://superset_app{os.environ.get('SUPERSET_APP_ROOT', '/')}/"  # When using docker compose baseurl should be http://superset_nginx{ENV{BASEPATH}}/  # noqa: E501
@@ -113,6 +135,12 @@ WEBDRIVER_BASEURL_USER_FRIENDLY = (
     f"http://localhost:8888/{os.environ.get('SUPERSET_APP_ROOT', '/')}/"
 )
 SQLLAB_CTAS_NO_LIMIT = True
+BABEL_DEFAULT_LOCALE = "pt_BR"
+LANGUAGE = "pt_BR"
+LANGUAGES = {
+    'pt_BR': {'flag': 'br', 'name': 'Portuguese'},
+    'en': {'flag': 'us', 'name': 'English'},
+}
 
 log_level_text = os.getenv("SUPERSET_LOG_LEVEL", "INFO")
 LOG_LEVEL = getattr(logging, log_level_text.upper(), logging.INFO)

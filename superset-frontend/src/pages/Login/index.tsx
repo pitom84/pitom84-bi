@@ -119,7 +119,7 @@ export default function Login() {
         height: calc(100vh - 200px);
       `}
     >
-      <StyledCard title={t('Sign in')} padded>
+      <StyledCard title={t('Pitom84 BI')} padded>
         {authType === AuthType.AuthOID && (
           <Flex justify="center" vertical gap="middle">
             <Form layout="vertical" requiredMark="optional" form={form}>
@@ -160,7 +160,7 @@ export default function Login() {
         {(authType === AuthType.AuthDB || authType === AuthType.AuthLDAP) && (
           <Flex justify="center" vertical gap="middle">
             <Typography.Text type="secondary">
-              {t('Enter your login and password below:')}
+              {t('Acesse com usuário e senha')}
             </Typography.Text>
             <Form
               layout="vertical"
@@ -169,7 +169,7 @@ export default function Login() {
               onFinish={onFinish}
             >
               <Form.Item<LoginForm>
-                label={<StyledLabel>{t('Username:')}</StyledLabel>}
+                label={<StyledLabel>{t('Usuário')}</StyledLabel>}
                 name="username"
                 rules={[
                   { required: true, message: t('Please enter your username') },
@@ -182,7 +182,7 @@ export default function Login() {
                 />
               </Form.Item>
               <Form.Item<LoginForm>
-                label={<StyledLabel>{t('Password:')}</StyledLabel>}
+                label={<StyledLabel>{t('Senha')}</StyledLabel>}
                 name="password"
                 rules={[
                   { required: true, message: t('Please enter your password') },
@@ -206,7 +206,7 @@ export default function Login() {
                     loading={loading}
                     data-test="login-button"
                   >
-                    {t('Sign in')}
+                    {t('Entrar')}
                   </Button>
                   {authRegistration && (
                     <Button

@@ -114,7 +114,8 @@ PACKAGE_JSON_FILE = str(files("superset") / "static/assets/package.json")
 #     "type": "image/png"
 #     "rel": "icon"
 # },
-FAVICONS = [{"href": "/static/assets/images/favicon.png"}]
+FAVICONS = [{"href": "/static/assets/images/pitom84/favicon.ico"}]
+# FAVICONS = [{"href": "/static/assets/images/favicon.png"}]
 
 
 def _try_json_readversion(filepath: str) -> str | None:
@@ -325,10 +326,11 @@ AUTH_RATE_LIMIT = "5 per second"
 # GLOBALS FOR APP Builder
 # ------------------------------
 # Uncomment to setup Your App name
-APP_NAME = "Superset"
+APP_NAME = "Pitom84"
 
 # Specify the App icon
-APP_ICON = "/static/assets/images/superset-logo-horiz.png"
+APP_ICON = "/static/assets/images/pitom84/image.png"
+# APP_ICON = "/static/assets/images/superset-logo-horiz.png"
 
 # Specify where clicking the logo would take the user'
 # Default value of None will take you to '/superset/welcome'
@@ -770,6 +772,22 @@ THEME_DARK: Theme = {"algorithm": "dark"}
 #
 # Enable UI-based theme administration for admins
 ENABLE_UI_THEME_ADMINISTRATION = True  # Allows admins to set system themes via UI
+THEME_DEFAULT = {
+    "token": {
+        "colorPrimary": "#71b790",
+        "colorSuccess": "#5ac189",
+        # ... your theme JSON configuration
+    }
+}
+
+# Optional: Dark theme configuration
+THEME_DARK = {
+    "algorithm": "dark",
+    "token": {
+        "colorPrimary": "#71b790",
+        # ... your dark theme overrides
+    }
+}
 
 # Custom font configuration
 # Load external fonts at runtime without rebuilding the application
@@ -934,9 +952,10 @@ STORE_CACHE_KEYS_IN_METADATA_DB = False
 # CORS Options
 # NOTE: enabling this requires installing the cors-related python dependencies
 # `pip install .[cors]` or `pip install apache_superset[cors]`, depending
-ENABLE_CORS = True
+ENABLE_CORS = False
 CORS_OPTIONS: dict[Any, Any] = {
     "origins": [
+        "*",
         "https://tile.openstreetmap.org",
         "https://tile.osm.ch",
     ]
@@ -1865,6 +1884,7 @@ TALISMAN_CONFIG = {
         ],
         "script-src": ["'self'", "'strict-dynamic'"],
     },
+    # "frame-ancestors": ["*.pitom.com.br"],
     "content_security_policy_nonce_in": ["script-src"],
     "force_https": False,
     "session_cookie_secure": False,

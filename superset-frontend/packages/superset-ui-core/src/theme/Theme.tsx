@@ -63,8 +63,10 @@ export class Theme {
 
   private static readonly defaultTokens = {
     // Brand
-    brandLogoAlt: 'Apache Superset',
-    brandLogoUrl: '/static/assets/images/superset-logo-horiz.png',
+    // brandLogoAlt: 'Apache Superset',
+    // brandLogoUrl: '/static/assets/images/superset-logo-horiz.png',
+    brandLogoAlt: 'Pitom84 BI',
+    brandLogoUrl: '/static/assets/images/pitom84/image.png',
     brandLogoMargin: '18px',
     brandLogoHref: '/',
     brandLogoHeight: '24px',

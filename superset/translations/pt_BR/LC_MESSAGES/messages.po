@@ -5023,7 +5023,13 @@ msgid "Enter the user's last name"
 msgstr "Nome do alerta"
 
 msgid "Enter the user's username"
-msgstr ""
+msgstr "Nome do seu usuário"
+
+msgid "Enter your login and password below:"
+msgstr "Informe seu usuário e senha"
+
+msgid "Sign in"
+msgstr "Entrar"
 
 msgid "Entity"
 msgstr "Entidade"
@@ -5366,7 +5372,7 @@ msgid "Factor to multiply the metric by"
 msgstr "Fator para multiplicar a métrica por"
 
 msgid "Fail login count"
-msgstr ""
+msgstr "Total falha login"
 
 msgid "Failed"
 msgstr "Falhou"
@@ -8148,6 +8154,10 @@ msgstr ""
 "inferiores a este valor são eliminadas"
 
 msgid "Password"
+msgstr "Senha"
+
+#, fuzzy
+msgid "Password:"
 msgstr "Senha"
 
 #, fuzzy
@@ -13122,6 +13132,10 @@ msgid "User was successfully updated!"
 msgstr ""
 
 msgid "Username"
+msgstr "Nome de usuário"
+
+#, fuzzy
+msgid "Username:"
 msgstr "Nome de usuário"
 
 #, fuzzy
