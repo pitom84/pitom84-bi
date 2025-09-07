@@ -336,7 +336,7 @@ APP_ICON = "/static/assets/images/pitom84/image.png"
 # Default value of None will take you to '/superset/welcome'
 # You can also specify a relative URL e.g. '/superset/welcome' or '/dashboards/list'
 # or you can specify a full URL e.g. 'https://foo.bar'
-LOGO_TARGET_PATH = None
+LOGO_TARGET_PATH = "/dashboards/list"
 
 # Specify tooltip that should appear when hovering over the App Icon/Logo
 LOGO_TOOLTIP = ""
@@ -775,6 +775,15 @@ ENABLE_UI_THEME_ADMINISTRATION = True  # Allows admins to set system themes via 
 THEME_DEFAULT = {
     "token": {
         "colorPrimary": "#71b790",
+        "colorPrimaryBg": "#e9f4ef",
+        "colorPrimaryBgHover": "#c8e5d7",
+        "colorPrimaryBorder": "#a6d6be",
+        "colorPrimaryBorderHover": "#89c9a9",
+        "colorPrimaryHover": "#63a883",
+        "colorPrimaryActive": "#4e8a6c",
+        "colorPrimaryTextHover": "#63a883",
+        "colorPrimaryText": "#71b790",
+        "colorPrimaryTextActive": "#4e8a6c",
         "colorSuccess": "#5ac189",
         # ... your theme JSON configuration
     }
@@ -785,6 +794,15 @@ THEME_DARK = {
     "algorithm": "dark",
     "token": {
         "colorPrimary": "#71b790",
+        "colorPrimaryBg": "#e9f4ef",
+        "colorPrimaryBgHover": "#c8e5d7",
+        "colorPrimaryBorder": "#a6d6be",
+        "colorPrimaryBorderHover": "#89c9a9",
+        "colorPrimaryHover": "#63a883",
+        "colorPrimaryActive": "#4e8a6c",
+        "colorPrimaryTextHover": "#63a883",
+        "colorPrimaryText": "#71b790",
+        "colorPrimaryTextActive": "#4e8a6c",
         # ... your dark theme overrides
     }
 }

@@ -8391,6 +8391,14 @@ msgstr "Por favor insira um URI SQLAlchemy para teste"
 msgid "Please enter a valid email address"
 msgstr ""
 
+#, fuzzy
+msgid "Please enter your password"
+msgstr "Por favor informe a sua senha"
+
+#, fuzzy
+msgid "Please enter your username"
+msgstr "Por favor informe o seu usuário"
+
 msgid "Please enter valid text. Spaces alone are not permitted."
 msgstr ""
 

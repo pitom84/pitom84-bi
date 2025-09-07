@@ -673,7 +673,7 @@ const RightMenu = ({
             </Tag>
           );
         })()}
-      <Menu
+      {!navbarRight.user_is_anonymous && (<Menu
         css={css`
           display: flex;
           flex-direction: row;
@@ -703,7 +703,7 @@ const RightMenu = ({
         onOpenChange={onMenuOpen}
         disabledOverflow
         items={menuItems}
-      />
+      />)}
       {navbarRight.documentation_url && (
         <>
           <StyledAnchor
@@ -738,11 +738,11 @@ const RightMenu = ({
           <span>&nbsp;</span>
         </>
       )}
-      {navbarRight.user_is_anonymous && (
+      {/* {navbarRight.user_is_anonymous && (
         <StyledAnchor href={navbarRight.user_login_url}>
           <Icons.LoginOutlined /> {t('Login')}
         </StyledAnchor>
-      )}
+      )} */}
       <TelemetryPixel
         version={navbarRight.version_string}
         sha={navbarRight.version_sha}

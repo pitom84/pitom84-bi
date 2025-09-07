@@ -172,7 +172,10 @@ export default function Login() {
                 label={<StyledLabel>{t('Usuário')}</StyledLabel>}
                 name="username"
                 rules={[
-                  { required: true, message: t('Please enter your username') },
+                  {
+                    required: true,
+                    message: t('Por favor informe o seu usuário'),
+                  },
                 ]}
               >
                 <Input
@@ -185,7 +188,10 @@ export default function Login() {
                 label={<StyledLabel>{t('Senha')}</StyledLabel>}
                 name="password"
                 rules={[
-                  { required: true, message: t('Please enter your password') },
+                  {
+                    required: true,
+                    message: t('Por favor informe a sua senha'),
+                  },
                 ]}
               >
                 <Input.Password
@@ -221,6 +227,9 @@ export default function Login() {
                 </Flex>
               </Form.Item>
             </Form>
+            <Typography.Text type="secondary">
+              {t('BETA 1.0 - Desenvolvido por Pitom84')}
+            </Typography.Text>
           </Flex>
         )}
       </StyledCard>
