@@ -490,7 +490,7 @@ class D3TimeFormat(TypedDict, total=False):
 
 D3_TIME_FORMAT: D3TimeFormat = {}
 
-CURRENCIES = ["USD", "EUR", "GBP", "INR", "MXN", "JPY", "CNY"]
+CURRENCIES = ["USD", "EUR", "GBP", "INR", "MXN", "JPY", "CNY", "BRL"]
 
 # ---------------------------------------------------
 # Feature flags
